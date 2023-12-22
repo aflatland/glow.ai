@@ -4,12 +4,50 @@ import OpenAI from "openai";
 const openai = new OpenAI({ apiKey: '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', dangerouslyAllowBrowser: true });
 
 const initialMessagesList = [
-  {content: "Hi! I am a friendly AI-generated chatbot. Whatcha wanna talk about?", name: "Chatbot"},
+  {content: "Hei! Jeg er en vennlig AI-generert chatbot. Hva vil du snakke om?", name: "Chatbot"},
 ];
+
+function CurrentRoom() {
+  const [messages, setMessages] = useState(initialMessagesList);
+
+  const generateResponse = async (userMessage) => {
+    try {
+      const response = await openai.chat.completions.create({
+        messages: [
+          { role: "system", content: "You are a friendly Norwegian. Continue the conversation in A1 Norwegian." },
+          { role: "user", content: userMessage},
+        ],
+        model: "gpt-3.5-turbo",
+      });
+
+      return response.choices[0].message.content;
+    } catch(error) {
+      console.error("Error generating response:", error);
+      return "Sorry, I couldn't generate a response.";
+    }
+  };
+
+  const handleSendMessage = async (userMessage) => {
+    setMessages(messages.concat({ content: userMessage, name: 'User' }));
+    const chatbotResponse = await generateResponse(userMessage);
+    setMessages(prevMessages => prevMessages.concat({ content: chatbotResponse, name: 'Chatbot' }));
+  };
+
+
+  return (
+    <div id = "current-room">
+      <CurrentRoomTitle name = {"Welcome to Linglow"} />
+      <Messages messages = {messages} />
+      <MessageBar onSendMessage = {handleSendMessage} />
+
+    </div>
+  );
+}
+
 
 function Message( { content, name } ) {
   return(
-    <li id = "message">{content} <span id = "message-sender">{name}</span></li>
+    <li id = "message"><span id = "message-sender">{name}</span> {content}</li>
   );
 }
 
@@ -32,6 +70,20 @@ function Messages({ messages }) {
   );
 }
 
+function SpecialCharacters() {
+
+  return(
+    <div id = "special-characters-keyboard">
+      <button class = "char-key">&#xE6;</button>
+      <button class = "char-key">&#248;</button>
+      <button class = "char-key">&#229;</button>
+      <button class = "char-key">&#198;</button>
+      <button class = "char-key">&#216;</button>
+      <button class = "char-key">&#197;</button>
+    </div>
+  );
+};
+
 function MessageBar({ onSendMessage }) {
   const [input, setInput] = useState('');
 
@@ -39,49 +91,26 @@ function MessageBar({ onSendMessage }) {
     event.preventDefault();
     onSendMessage(input);
     setInput('');
+
   };
 
   return(
-    <form id = "messageBar" onSubmit = {handleSubmit}>
-      <input id = "messageBar-text"
-        type = "text"  
-        placeholder = 
-        "Enter Message here..."
-        autoComplete="off"
-        value = {input}
-        onChange ={(e) => setInput(e.target.value)}
-        />
-        <button id = "messageBar-send-button" type = "submit">Send</button>
-    </form>
+    <div id = "messageBar">
+      <form id = "messageBar-form" onSubmit = { handleSubmit }>
+        <input id = "messageBar-text"
+          type = "text"  
+          placeholder = 
+          "Enter Message here..."
+          autoComplete="off"
+          value = {input}
+          onChange ={(e) => setInput(e.target.value)}
+          />
+          <button id = "messageBar-send-button" type = "submit">Send</button>
+      </form>
+      <SpecialCharacters />
+    </div>
   );
 }
-
-function RoomName({name}){
-  return(
-    <p>{name}</p>
-  );
-}
-
-function RoomsList({ rooms }){
-  const rows = [];
-
-  rooms.forEach((room) => {
-    rows.push(
-      <RoomName name = {room.name} />
-    );
-  });
-
-  return(
-    <ul>
-      {rows}
-    </ul>
-  );
-}
-
-const ROOMS = [
-  {name: "fun"},
-  {name: "yoga"}
-];
 
 function CurrentRoomTitle({ name }){
   return(
@@ -90,33 +119,6 @@ function CurrentRoomTitle({ name }){
   
 }
 
-function CurrentRoom() {
-  const [messages, setMessages] = useState(initialMessagesList);
-
-  const handleSendMessage = (newMessage) => {
-    setMessages([...messages, { content: newMessage, name: 'User'}]);
-  };
-
-  return (
-    <div id = "current-room">
-      <CurrentRoomTitle name = {"Welcome to Chat Room"} />
-      <Messages messages = {messages} />
-      <MessageBar onSendMessage = {handleSendMessage} />
-
-    </div>
-  );
-}
-
-async function main() {
-  const completion = await openai.chat.completions.create({
-    messages: [{ role: "system", content: "You are a helpful assistant." }],
-    model: "gpt-3.5-turbo",
-  });
-
-  console.log(completion.choices[0]);
-}
-
 export default function App() {
-  //main();
   return <CurrentRoom />;
 }
