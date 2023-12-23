@@ -4,7 +4,7 @@ import OpenAI from "openai";
 const openai = new OpenAI({ apiKey: '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', dangerouslyAllowBrowser: true });
 
 const initialMessagesList = [
-  {content: "Hei! Jeg er en vennlig AI-generert chatbot. Hva vil du snakke om?", name: "Chatbot"},
+  {content: "Hallo! Ich bin ein freundlicher, KI-generierter Chatbot. Worüber möchten Sie sprechen?", name: "Chatbot"},
 ];
 
 function CurrentRoom() {
@@ -14,7 +14,7 @@ function CurrentRoom() {
     try {
       const response = await openai.chat.completions.create({
         messages: [
-          { role: "system", content: "You are a friendly Norwegian. Continue the conversation in A1 Norwegian." },
+          { role: "system", content: "You are a friendly German. Continue the conversation in A1 German." },
           { role: "user", content: userMessage},
         ],
         model: "gpt-3.5-turbo",
