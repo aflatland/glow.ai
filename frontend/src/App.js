@@ -7,6 +7,7 @@ const initialMessagesList = [
   {content: "Hallo! Ich bin ein freundlicher, KI-generierter Chatbot. Worüber möchten Sie sprechen?", name: "Chatbot"},
 ];
 
+
 function CurrentRoom() {
   const [messages, setMessages] = useState(initialMessagesList);
 
@@ -34,13 +35,20 @@ function CurrentRoom() {
   };
 
   const [text, setText] = useState('');
+  const message = "Write a rap about oranges";
 
       useEffect(() => {
-        fetch('http://localhost:8000/api/get-text/')
+        fetch('http://localhost:8000/api/get-text/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ message: message })
+        })
             .then(response => response.json())
             .then(data => setText(data.text))
             .catch(error => console.error('Error fetching text:', error));
-    }, []);
+    }, [message]);
 
 
 

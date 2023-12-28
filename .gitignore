@@ -1,1 +1,2 @@
-.env
+# openAI api key
+backend/.env
