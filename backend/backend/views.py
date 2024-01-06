@@ -35,3 +35,17 @@ def get_gpt_response(messages):
     reply = completion.choices[0].message.content
     return reply
     
+def chat(request):
+    data = json.loads(request.body) # what is this?
+    user_message = data['message'] # what is this?
+
+    completion = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[{"role": "user", "content": user_message}]
+    )
+
+    response = completion.choices[0].message.content
+    data = {"text":response}
+
+    return JsonResponse(data) # what does JsonResponse do?
+

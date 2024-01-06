@@ -15,10 +15,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from .views import get_text
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/get-text/', get_text, name = 'get-text')
+    path('api/get-text/', get_text, name = 'get-text'),
+    path('chatbot/', include('chatbot.urls'))
+   # path('chatbot/', include('chatbot.urls'))# what does include do?
 ]
