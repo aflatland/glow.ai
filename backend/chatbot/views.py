@@ -10,10 +10,6 @@ client = OpenAI()
 @require_http_methods(["POST"])
 def chat(request):
     data = json.loads(request.body)
-    #chat = [{"role": "system", "content": "You are a helpful assistant designed to output JSON."},
-    #{"role": "user", "content": "Who won the world series in 2020?"}]
-
-    #data = {'chatsofar': chat}
 
     completion = client.chat.completions.create(
         model="gpt-3.5-turbo",  # Specify the correct engine

@@ -52,7 +52,12 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware'
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True
+#CORS_ALLOW_ORIGINS = [
+#    "http://localhost:3000", # origin of react app
+#    "http://localho.st:3000"
+#]
+
+CORS_ALLOW_ALL_ORIGINS =  True
 
 ROOT_URLCONF = 'backend.urls'
 

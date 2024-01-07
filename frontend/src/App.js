@@ -1,12 +1,26 @@
 import React, { useRef, useState, useEffect } from 'react';
 
 const initialMessagesList = [
-  { "role":"system", "content": "You are a friendly Norwegian who speaks A1 Norwegian in order to help beginners improve their Norwegian language skills." },
-  { "role": "assistant", "content":"Hei!" },
+  { "role":"system", "content": "You are a friendly Norwegian who speaks A1 Norwegian. Your goal is to help the user improve their Norwegian and keep the conversation going. Repeat words already used in the chat as much as possible." },
+  { "role": "assistant", "content":"Hei! Jeg er en vennlig AI-generert språklærer. Hva ønsker du å snakke om?" },
 ];
 
 const username = 'User';
 const botname = 'Moby';
+
+function SpecialCharacters() {
+
+  return(
+    <div id = "special-characters-keyboard">
+      <button className = "char-key">&#xE6;</button>
+      <button className = "char-key">&#248;</button>
+      <button className = "char-key">&#229;</button>
+      <button className = "char-key">&#198;</button>
+      <button className = "char-key">&#216;</button>
+      <button className = "char-key">&#197;</button>
+    </div>
+  );
+};
 
 function Message({ content, name }) {
   return(
@@ -39,20 +53,6 @@ function Messages({ messages }) {
     </ul>
   );
 }
-
-function SpecialCharacters() {
-
-  return(
-    <div id = "special-characters-keyboard">
-      <button className = "char-key">&#xE6;</button>
-      <button className = "char-key">&#248;</button>
-      <button className = "char-key">&#229;</button>
-      <button className = "char-key">&#198;</button>
-      <button className = "char-key">&#216;</button>
-      <button className = "char-key">&#197;</button>
-    </div>
-  );
-};
 
 function MessageBar({ onSendMessage }) {
   const [input, setInput] = useState('');
@@ -121,7 +121,7 @@ function CurrentRoom() {
   // putting all components together
   return (
     <div id = "current-room">
-      <CurrentRoomTitle name = {"Moby"} />
+      <CurrentRoomTitle name = {"Norsk Chat"} />
       <Messages messages = {chat} />
       <MessageBar onSendMessage = {sendMessage} />
 
