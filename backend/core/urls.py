@@ -21,6 +21,6 @@ from .views import get_text
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/get-text/', get_text, name = 'get-text'),
-    path('chatbot/', include('chatbot.urls'))
-   # path('chatbot/', include('chatbot.urls'))# what does include do?
+    path('api/chatbot/', include('chatbot.urls'))
+    #path('api/chatbot/', include('chatbot.urls'))# what does include do?
 ]

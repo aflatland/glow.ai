@@ -20,3 +20,21 @@ def chat(request):
 
     return JsonResponse({"reply": resp})
 
+@csrf_exempt
+@require_http_methods(["POST"])
+def translate(request):
+    data = json.loads(request.body)
+    #data = {"textToTranslate":"Hei! Hvordan er du"}
+
+    messages = [
+        {"role":"system", "content":"Translate Norwegian to English"},
+        {"role":"user", "content":data['textToTranslate']}
+    ]
+
+    completion = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=messages
+    )
+
+    resp = completion.choices[0].message.content 
+    return JsonResponse({"reply": resp})

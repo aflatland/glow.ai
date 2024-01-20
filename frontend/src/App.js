@@ -6,7 +6,7 @@ const initialMessagesList = [
 ];
 
 const username = 'User';
-const botname = 'Moby';
+const botname = 'Mobi';
 
 function SpecialCharacters() {
 
@@ -23,9 +23,63 @@ function SpecialCharacters() {
 };
 
 function Message({ content, name }) {
+  const [isHovered, setIsHovered] = useState(false); 
+  const [isTranslationVisible, setIsTranslationVisible] = useState(false);
+  const [translatedText, setTranslatedText] = useState("...");
+  const [isTranslated, setIsTranslated] = useState(false);
+
+  const handleMouseEnter = () => setIsHovered(true);
+  const handleMouseLeave = () => setIsHovered(false);
+
+  const handleTextClick = () => {
+    setIsTranslationVisible(prev => !prev);
+
+    if (!isTranslated) {
+      translate(content)
+    }
+  }
+  
+  const textColor = isHovered ? '#717171':'#181818';
+  const cursor = isHovered? 'pointer': 'auto';
+
+  const translate = async (content) => {
+
+    // get chatbot response from django server
+    // message = user input from input field, set where return is
+    const server_response = await fetch('http://localhost:8000/api/chatbot/translate', {
+      method: 'POST', // sending data to server
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ textToTranslate: content }), // can only send JSON
+    });
+
+    // django response is parsed as JSON, and is now a useful JavaScript object?
+    const data = await server_response.json();
+
+    // add response to chat
+    setTranslatedText(data.reply);
+    setIsTranslated(true);
+
+  };
+
+
   return(
     <li className = "message">
-      <span className = "message-sender">{name}</span> {content}
+      <span className = "message-sender">{name} </span>
+      <span style={{color:textColor, cursor:cursor}} 
+      onMouseEnter={handleMouseEnter} 
+      onMouseLeave={handleMouseLeave}
+      onClick={handleTextClick}>
+      {content}
+      </span>
+
+      {isTranslationVisible && (
+        <div style={{ border: '1px solid black', padding: '10px', position: 'absolute', backgroundColor: 'white', zIndex: 100 }}>
+          {translatedText}
+        </div>
+      )}
+
     </li>
   );
 }
@@ -102,7 +156,7 @@ function CurrentRoom() {
 
     // get chatbot response from django server
     // message = user input from input field, set where return is
-    const server_response = await fetch('http://localhost:8000/chatbot/', {
+    const server_response = await fetch('http://localhost:8000/api/chatbot/', {
       method: 'POST', // sending data to server
       headers: {
         'Content-Type': 'application/json',
