@@ -1,5 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 
+const server = "http://127.0.0.1:8000/"; // https://backend-ao4yls34ba-uc.a.run.app
+
 const initialMessagesList = [
   { "role":"system", "content": "You are a friendly Norwegian who speaks A1 Norwegian. Your goal is to help the user improve their Norwegian and keep the conversation going. Repeat words already used in the chat as much as possible." },
   { "role": "assistant", "content":"Hei! Jeg er en vennlig AI-generert språklærer. Hva ønsker du å snakke om?" },
@@ -46,7 +48,7 @@ function Message({ content, name }) {
 
     // get chatbot response from django server
     // message = user input from input field, set where return is
-    const server_response = await fetch('https://backend-ao4yls34ba-uc.a.run.app/api/chatbot/translate', {
+    const server_response = await fetch(server + 'api/chatbot/translator', {
       method: 'POST', // sending data to server
       headers: {
         'Content-Type': 'application/json',
@@ -75,9 +77,9 @@ function Message({ content, name }) {
       </span>
 
       {isTranslationVisible && (
-        <div style={{ border: '1px solid black', padding: '10px', position: 'absolute', backgroundColor: 'white', zIndex: 100 }}>
+        <p style={{ paddingLeft: '50px', color: '#F88379' }}>
           {translatedText}
-        </div>
+        </p>
       )}
 
     </li>
@@ -156,7 +158,7 @@ function CurrentRoom() {
 
     // get chatbot response from django server
     // message = user input from input field, set where return is
-    const server_response = await fetch('https://backend-ao4yls34ba-uc.a.run.app/api/chatbot/', {
+    const server_response = await fetch(server + '/api/chatbot/', {
       method: 'POST', // sending data to server
       headers: {
         'Content-Type': 'application/json',

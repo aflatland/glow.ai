@@ -22,7 +22,7 @@ def chat(request):
 
 @csrf_exempt
 @require_http_methods(["POST"])
-def translate(request):
+def translator(request):
     data = json.loads(request.body)
     #data = {"textToTranslate":"Hei! Hvordan er du"}
 

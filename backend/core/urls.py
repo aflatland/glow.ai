@@ -16,11 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from .views import get_text
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/get-text/', get_text, name = 'get-text'),
     path('api/chatbot/', include('chatbot.urls'))
-    #path('api/chatbot/', include('chatbot.urls'))# what does include do?
 ]
