@@ -25,8 +25,11 @@ SECRET_KEY = 'django-insecure-5u&i3mamtdia*_ts%&qs)wwgvf0ki4p!srh$ha35doi4mxbi6c
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['django-env12345.eba-7ypmegis.us-west-2.elasticbeanstalk.com']
-
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'backend-ao4yls34ba-uc.a.run.app'
+    ]
+CORS_ALLOW_ALL_ORIGINS = True
 
 # Application definition
 
@@ -57,7 +60,6 @@ MIDDLEWARE = [
 #    "http://localho.st:3000"
 #]
 
-CORS_ALLOW_ALL_ORIGINS =  True
 
 ROOT_URLCONF = 'core.urls'
 

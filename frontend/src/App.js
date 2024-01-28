@@ -6,7 +6,7 @@ const initialMessagesList = [
 ];
 
 const username = 'User';
-const botname = 'Mobi';
+const botname = 'Mogi';
 
 function SpecialCharacters() {
 
@@ -46,7 +46,7 @@ function Message({ content, name }) {
 
     // get chatbot response from django server
     // message = user input from input field, set where return is
-    const server_response = await fetch('http://localhost:8000/api/chatbot/translate', {
+    const server_response = await fetch('https://backend-ao4yls34ba-uc.a.run.app/api/chatbot/translate', {
       method: 'POST', // sending data to server
       headers: {
         'Content-Type': 'application/json',
@@ -156,7 +156,7 @@ function CurrentRoom() {
 
     // get chatbot response from django server
     // message = user input from input field, set where return is
-    const server_response = await fetch('http://localhost:8000/api/chatbot/', {
+    const server_response = await fetch('https://backend-ao4yls34ba-uc.a.run.app/api/chatbot/', {
       method: 'POST', // sending data to server
       headers: {
         'Content-Type': 'application/json',
