@@ -2,13 +2,3 @@
 @tailwind components;
 @tailwind utilities;
 
-.fade-out-effect::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 20px; /* Adjust height as needed */
-  background: linear-gradient(to bottom, white, transparent);
-  pointer-events: none; /* To ensure the fade doesn't interfere with scrolling/clicking */
-}

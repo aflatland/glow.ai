@@ -27,7 +27,7 @@ def translator(request):
     #data = {"textToTranslate":"Hei! Hvordan er du"}
 
     messages = [
-        {"role":"system", "content":"Translate Norwegian to English"},
+        {"role":"system", "content":"Translate the text to English"},
         {"role":"user", "content":data['textToTranslate']}
     ]
 
