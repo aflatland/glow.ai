@@ -1,115 +1,14 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  padding: 0;
-
-}
-
-button {
-  border: none;
-}
-
-#current-room {
-  width: 80%;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  max-width:600px;
-
-
-}
-
-.message-sender {
-  color: goldenrod;
-}
-
-.messages {
-  flex-grow: 1;
-  overflow-y: auto;
-
-  margin: 0;
-  padding: 3px;
-
-}
-
-.message {
-  padding-bottom: 12px;
-  list-style: none;
-  margin: 0;
-}
-
-#messageBar-form {
-  width: 100%;
-  display: flex;
-  flex-shrink: 0;
-
-
-}
-
-#messageBar-text {
-  flex-grow: 1;
-  padding: 10px;
-}
-
-#messageBar-send-button {
-  width: 50px;
-
-}
-
-li {
-  line-height: 25px;
-}
-
-/* MESSAGE BAR */
-/* keys */
-.char-key {
-  width: 30px;
-  margin-right: 3px;
-  padding: 5px;
-}
-
-button:hover {
-  background-color:#c2bfb7;
-  cursor: pointer;
-}
-
-#special-characters-keyboard {
-  display: flex;
-  padding-top: 8px;
-}
-
-#messageBar {
-  padding-bottom: 30px;
-}
-
-
-
-input:focus {
-  outline: none;
-}
-
-input {
-  border: 1px solid #c2bfb7;
-}
-
-/*scroll bar*/
-
-/* Styling the scrollbar thumb (the draggable part) */
-::-webkit-scrollbar-thumb {
-  background-color: #e9e8e1; /* Dark grey thumb */
-  border-radius: 3px; /* Rounded corners for the thumb */
-}
-
-
-
-/* Set the width or height (depending on scrollbar orientation) */
-::-webkit-scrollbar {
-  width: 10px; /* Width of the vertical scrollbar */
-  height: 10px; /* Height of the horizontal scrollbar */
+.fade-out-effect::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 20px; /* Adjust height as needed */
+  background: linear-gradient(to bottom, white, transparent);
+  pointer-events: none; /* To ensure the fade doesn't interfere with scrolling/clicking */
 }

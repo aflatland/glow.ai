@@ -13,7 +13,7 @@ def chat(request):
 
     completion = client.chat.completions.create(
         model="gpt-3.5-turbo",  # Specify the correct engine
-        messages=data['chatsofar'],     # Ensure this matches the frontend structure
+        messages=data['completeChat'],     # Ensure this matches the frontend structure
     )
 
     resp = completion.choices[0].message.content
@@ -37,4 +37,4 @@ def translator(request):
     )
 
     resp = completion.choices[0].message.content 
-    return JsonResponse({"reply": resp})
+    return JsonResponse({"translation": resp})
