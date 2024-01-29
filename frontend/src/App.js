@@ -1,7 +1,6 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, memo } from 'react';
 import { translateText, botResponse } from './apiService';
 
-//const server = "http://127.0.0.1:8000/"; // https://backend-ao4yls34ba-uc.a.run.app
 const username = 'User';
 const botname = 'Mogi';
 
@@ -23,9 +22,14 @@ function SpecialCharacters({ onClickCharacter }) {
 
   return(
     <div className="flex gap-1 mt-1">
-      {characters.map((c) => {
+      {characters.map((c, index) => {
         return(
-        <button onClick = {()=> onClickCharacter(c) } className = "bg-gray-300 px-2 hover:bg-gray-400">{c}</button>
+        <button 
+        key = {index}
+        onClick = {()=> onClickCharacter(c) } 
+        className = "bg-gray-300 px-2 hover:bg-gray-400">
+          {c}
+          </button>
         )
 
       })}
@@ -36,7 +40,8 @@ function SpecialCharacters({ onClickCharacter }) {
 };
 
 // translate
-function Message({ content, name }) {
+// memoization preents renders of messages that haven't changed
+const Message = memo(function Message({ content, name }) {
  
   // state controlling translation visibility
   const [isTranslatedMessageVisible, setIsTranslatedMessageVisible] = useState(false);
@@ -63,7 +68,8 @@ function Message({ content, name }) {
         console.error('Translation failed:', error);
       }
     }
-  }
+  };
+
 
   // render message component
   return(
@@ -81,9 +87,10 @@ function Message({ content, name }) {
 
     </li>
   );
-}
+});
 
-function Messages({ messages }) {
+
+const Messages = memo(function Messages({ messages }) {
 
   // references the end of the message list
   const messagesEndRef = useRef();
@@ -117,7 +124,7 @@ function Messages({ messages }) {
       <div ref = {messagesEndRef} />
     </ul>
   );
-}
+});
 
 function MessageBar({ onSendMessage }) {
   const [input, setInput] = useState('');
@@ -235,7 +242,6 @@ export default function App() {
         </div>
 
         
-
       </div>
 
       <div className = "h-[60px] text-gray-800 flex gap-4 justify-end items-center pr-28 pb-2">
