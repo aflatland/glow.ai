@@ -53,6 +53,7 @@ const Home = () => {
     const [selectedLanguage, setSelectedLanguage] = useState(localStorage.getItem('learnLanguage') || learnLanguages[0][1]);
     
     return (
+
         <div className = "flex flex-col justify-center items-center h-screen">
             <Login />
             <div className ="space-y-8">
@@ -60,7 +61,9 @@ const Home = () => {
             <DropDown label="Using" id = "using" list = {useLanguages} />
             <Button label="Launch ChatRoom" selectedLanguage = {selectedLanguage} />
             </div>
+
         </div>
+
     );
 };
  
