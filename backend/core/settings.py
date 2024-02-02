@@ -29,6 +29,7 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     'backend-ao4yls34ba-uc.a.run.app'
     ]
+
 CORS_ALLOW_ALL_ORIGINS = True
 
 # Application definition
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'chatbot',
+    'members',
 ]
 
 MIDDLEWARE = [
@@ -91,6 +93,8 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+AUTH_USER_MODEL = 'members.Member'
 
 
 # Password validation

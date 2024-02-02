@@ -35,7 +35,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\Annabel\chat-app\venv-3.11"
+VIRTUAL_ENV="C:\Users\Annabel\chat-app\backend\venv-3.11"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
