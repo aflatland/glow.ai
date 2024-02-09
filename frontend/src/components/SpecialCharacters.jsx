@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const SpecialCharacters = ({ onClickCharacter, characters }) => {
+const SpecialCharacters = ({ onClickCharacter, characters }) => {
 
     return(
       <div className="flex gap-1 mt-1">
@@ -20,3 +20,5 @@ export const SpecialCharacters = ({ onClickCharacter, characters }) => {
       </div>
     );
   };
+
+  export default SpecialCharacters;
