@@ -3,14 +3,6 @@ import { Chat } from "../components/Chat.jsx";
 import { Options } from "../components/Options.jsx";
 import { ExitX } from "../components/ExitX.jsx";
 
-function Correction() {
-
-  return(
-    <>
-      <p className = "text-gray-800 m-5">Coming soon! Text Correction~~</p>
-    </>
-  );
-}
 
 export default function ChatRoom() {
   return (
@@ -23,9 +15,7 @@ export default function ChatRoom() {
           <div className = "flex-grow overflow-auto relative">
             <Chat />
           </div>
-          <div className = "w-100 bg-[#E7F6F6] rounded-sm">
-          <Correction />
-          </div>
+
         </div>   
       </div>
 

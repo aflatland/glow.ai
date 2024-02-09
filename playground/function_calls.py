@@ -11,14 +11,7 @@ tools = [
             "parameters": {
                 "type": "object",
                 "properties": {
-                    "contains_grammatically_incorrect_Norwegian": {
-                       "type": "boolean",
-                       "description": f"""
-                              Return true if the sentence is grammatically incorrect Norwegian.
-                              You may also return true if the sentence contains a language other than Norwegian.
-
-                          """,
-                    },
+                    
                     "corrected_text": {
                         "type": "string",
                         "description": f"""
@@ -32,10 +25,18 @@ tools = [
                               Explanation of the corrected_text in English for someone who is learning conversational Norwegian.
                               Be sure to explain why the corrections were made.
                        """,
-                    }
+                    },
+
+                    "corrected": {
+                       "type": "boolean",
+                       "description": f"""
+                              Return TRUE if the User wrote grammatically incorrect Norwegian
+
+                          """,
+                    },
 
                 },
-                "required": ["contains_grammatically_incorrect_Norwegian, corrected_text, explanation"],
+                "required": ["corrected_text, explanation, corrected"],
             },
         }
     },
@@ -52,7 +53,7 @@ def jsonify_correction(correction_exists, corrected_text, explanation): # correc
 
 # extracts correction details from function call
 def get_correction_details(arguments):
-   correction_exists = arguments.get("contains_grammatically_incorrect_Norwegian")
+   correction_exists = arguments.get("corrected")
    corrected_text = arguments.get("corrected_text")
    explanation = arguments.get("explanation")
 
@@ -89,7 +90,7 @@ try:
       },
       {
         "role": "user",
-        "content": "Hi there!"
+        "content": "Hvordan er du?"
       },
 
     ],

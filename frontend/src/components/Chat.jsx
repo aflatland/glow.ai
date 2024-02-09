@@ -56,6 +56,7 @@ export const Chat = () => {
   
       // updates chat with respones from bot
       try {
+        console.log("Requesting chat response...")
         const response = await getBotResponse(updatedChatList);
         setChatList([...updatedChatList, response]);
         

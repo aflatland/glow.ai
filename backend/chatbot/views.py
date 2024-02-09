@@ -6,6 +6,9 @@ import json
 
 client = OpenAI()
 
+def sayHello(request):
+    return JsonResponse({"Hello":"For all those times you just wanted to say hello."})
+
 @csrf_exempt
 @require_http_methods(["POST"])
 def chat(request):
@@ -159,3 +162,4 @@ def corrector(request):
         print("function not called for some reason?")  
 
     return JsonResponse(handle_language_correction_request())
+
