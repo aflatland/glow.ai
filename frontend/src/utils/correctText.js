@@ -1,4 +1,5 @@
 import { API_BASE_URL } from '../constants/apiBaseUrl'
+import { defaultLanguage } from '../constants/userSettings.js' 
 
 async function correctText(text) {
     try {
@@ -8,7 +9,7 @@ async function correctText(text) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-            learning_language: "Norwegian",
+            learning_language: localStorage.getItem('learnLanguage' || defaultLanguage),
             user_content: text
         }),
       });

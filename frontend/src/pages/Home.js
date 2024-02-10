@@ -16,9 +16,7 @@ const useLanguages = [
 
 function LoginIcon() {
     return(
-        <Link to = "/login">
             <UserIcon className="absolute top-8 right-10 h-6 w-6 text-gray-600 cursor-pointer" />
-        </Link>
     );
 }
 
@@ -57,12 +55,18 @@ const Home = () => {
     return (
 
         <div className = "flex flex-col justify-center items-center h-screen">
+
             <LoginIcon />
+
+            <p className = "w-56 pb-10 text-gray-600">Select the language you would like to chat in. </p>
+
             <div className ="space-y-8">
             <DropDown label="Learn" id = "learn" list={learnLanguages} onSelectValue = {setSelectedLanguage} />
             <DropDown label="Using" id = "using" list = {useLanguages} />
-            <Button label="Launch ChatRoom" selectedLanguage = {selectedLanguage} />
+            <Button label="Launch Chat Room" selectedLanguage = {selectedLanguage} />
             </div>
+
+            
 
         </div>
 
